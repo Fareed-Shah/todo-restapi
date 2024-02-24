@@ -1,8 +1,5 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:mock_api_todo/custom_widgets.dart/app_button.dart';
 import 'package:mock_api_todo/custom_widgets.dart/app_textfield.dart';
 import 'package:http/http.dart' as http;
 import 'package:mock_api_todo/network/api.dart';
@@ -37,12 +34,9 @@ class _FormViewState extends State<FormView> {
       Response response = await http.post(
           Uri.parse(BaseConfig.baseUrl + BaseConfig.postUsers),
           body: {"name": userName, "email": userEmail});
-      
-      if (response.statusCode == 201) {
-        print("user created succesfully");
-      }
+      if (context.mounted) Navigator.of(context).pop();
     } catch (e) {
-      print(e);
+      e;
     }
   }
 
