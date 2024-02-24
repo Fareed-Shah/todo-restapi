@@ -45,7 +45,12 @@ class _UserViewState extends State<UserView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("user profile"),
+        title: const Text(
+          "user profile",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.yellow,
       ),
       body: !isLoading
           ? ListView.builder(

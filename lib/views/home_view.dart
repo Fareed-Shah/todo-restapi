@@ -47,16 +47,15 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('To-Do'),
+        title: const Text(
+          'To-Do',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
+        backgroundColor: Colors.yellow,
       ),
       body: !isLoading
-          ? ListView.builder(
-              itemCount: todoList.length,
-              itemBuilder: (context, index) => ListTile(
-                    title: Text(todoList[index].title ?? "f"),
-                    subtitle: Text(todoList[index].description ?? ""),
-                  ))
+          ? ListView.builder(itemCount: todoList.length, itemBuilder: appcard)
           : const Center(child: CircularProgressIndicator()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -66,6 +65,7 @@ class _HomeViewState extends State<HomeView> {
         child: const Icon(Icons.add),
       ),
       drawer: Drawer(
+        backgroundColor: Colors.lightBlue,
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0, right: 8.0, left: 8.0),
           child: ListView(
@@ -84,6 +84,41 @@ class _HomeViewState extends State<HomeView> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget appcard(BuildContext context, int index) {
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    todoList[index].title!,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16.0),
+                  ),
+                  Text(
+                    todoList[index].description!,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 10.0),
+                  )
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.edit,
+              color: Colors.blue,
+            ),
+            const Icon(Icons.delete, color: Colors.red)
+          ],
         ),
       ),
     );
